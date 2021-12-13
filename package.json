@@ -1,0 +1,48 @@
+{
+  "name": "frontend-mv--web-app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "co": "sui-mono commit",
+    "dev": "sui-bundler dev",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "ssr": "sui-bundler build -C && sui-ssr build -C && node server/index.js --inspect `pbpaste`",
+    "lint": "sui-lint js && sui-lint sass"
+  },
+  "author": "",
+  "license": "ISC",
+  "eslintConfig": {
+    "extends": [
+      "./node_modules/@s-ui/lint/eslintrc.js"
+    ]
+  },
+  "prettier": "./node_modules/@s-ui/lint/.prettierrc.js",
+  "stylelint": {
+    "extends": "./node_modules/@s-ui/lint/stylelint.config.js"
+  },
+  "devDependencies": {
+    "@s-ui/bundler": "^7.39.0",
+    "@s-ui/lint": "^3.39.0",
+    "@s-ui/mono": "^2.18.0",
+    "@s-ui/precommit": "^2.14.0",
+    "@s-ui/ssr": "^7.42.0",
+    "husky": "4.3.0"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "sui-precommit run"
+    }
+  },
+  "dependencies": {
+    "@s-ui/react-router": "1",
+    "@s-ui/component-peer-dependencies": "^1.9.0",
+    "@s-ui/hoc": "^1.34.0",
+    "@s-ui/i18n": "^1.28.0",
+    "@s-ui/react-initial-props": "2",
+    "isomorphic-fetch": "^3.0.0",
+    "frontend-mv--lib-movies": "./../frontend-mv--lib-movies",
+    "frontend-mv--uilib-theme": "./../frontend-mv--uilib-theme",
+    "frontend-mv--uilib-components": "./../frontend-mv--uilib-components"
+  }
+}
