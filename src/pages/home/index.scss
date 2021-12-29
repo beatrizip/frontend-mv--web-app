@@ -1,0 +1,44 @@
+@import '~@s-ui/theme/lib/index';
+@import '~@s-ui/react-molecule-pagination/lib/index';
+@import 'frontend-mv--uilib-components-header-search/';
+@import 'frontend-mv--uilib-components-content-list/index';
+@import 'frontend-mv--uilib-components-content-card/index';
+@import 'frontend-mv--uilib-components-movie-poster/index';
+
+.mv-PageHome {
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  max-width: 1000px;
+
+  &-emptySearch {
+    align-items: center;
+    display: flex;
+    font-size: $fz-xxl;
+    height: 100px;
+    justify-content: center;
+  }
+
+  &-total {
+    font-size: $fz-l;
+    margin: $m-xl 0;
+  }
+
+  &-pager {
+    display: flex;
+    justify-content: center;
+    margin: $m-xl 0;
+  }
+
+  &-new,
+  &-noResults,
+  &-total {
+    color: $c-primary;
+    font-size: $fz-xxl;
+    margin: $m-l 0;
+  }
+
+  &-noResults {
+    text-align: center;
+  }
+}

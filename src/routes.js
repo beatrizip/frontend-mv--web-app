@@ -1,12 +1,9 @@
 import React from 'react'
-import Route from 'react-router/lib/Route'
-import Router from 'react-router/lib/Router'
-import IndexRoute from 'react-router/lib/IndexRoute'
+import {Route, Router, IndexRoute} from '@s-ui/react-router'
 import loadPage from '@s-ui/react-initial-props/lib/loadPage'
 import contextFactory from './contextFactory'
-import App from './app'
 
-const HomePage = loadPage(contextFactory, () =>
+const Home = loadPage(contextFactory, () =>
   import(/* webpackChunkName: "Home" */ './pages/Home')
 )
 
@@ -16,9 +13,9 @@ const Detail = loadPage(contextFactory, () =>
 
 export default (
   <Router>
-    <Route component={App}>
+    <Route>
       <Route path="/">
-        <IndexRoute getComponent={HomePage} />
+        <IndexRoute getComponent={Home} />
       </Route>
       <Route path="/movie/:id" getComponent={Detail} />
     </Route>

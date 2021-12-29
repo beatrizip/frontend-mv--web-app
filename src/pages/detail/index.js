@@ -1,16 +1,35 @@
-import React from 'react'
+import React, {useContext, useEffect, useState} from 'react'
+import Context from '@s-ui/react-context'
 import Helmet from 'react-helmet'
-import PropTypes from 'prop-types'
+import MovieDetail from 'frontend-mv--uilib-components-movie-detail'
+import {useParams} from '@s-ui/react-router'
 
-const Detail = (_, {i18n}) => (
-  <>
-    <Helmet>
-      <h1>holi pages/home</h1>
-      <link rel="canonical" href="http://spa.mock/" />
-    </Helmet>
-  </>
-)
+const Detail = () => {
+  const {id} = useParams()
+  const {domain} = useContext(Context)
+  const [movie, setMovie] = useState()
 
-Detail.contextTypes = {i18n: PropTypes.object}
+  useEffect(() => {
+    domain
+      .get('get_movie_detail_use_case')
+      .execute({id})
+      .then(movie => setMovie(movie))
+      .catch(error =>
+        console.log('ERROR (get_movie_details_use_case): ', error)
+      )
+  }, [domain, id])
+
+  if (!movie) return null
+
+  return (
+    <div className="mv-PageDetail">
+      <Helmet>
+        <link rel="canonical" href="http://spa.mock/" />
+      </Helmet>
+
+      <MovieDetail movie={movie} />
+    </div>
+  )
+}
 
 export default Detail

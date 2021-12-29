@@ -1,4 +1,4 @@
-exports.ids = ["vendors~Home"];
+exports.ids = ["vendors~Detail~Home"];
 exports.modules = {
 
 /***/ "../node_modules/react-fast-compare/index.js":

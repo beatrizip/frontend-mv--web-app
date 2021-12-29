@@ -1,2 +1,10 @@
+@import '~@s-ui/theme/lib/settings';
 @import '~frontend-mv--uilib-theme/lib/index';
 // Rest of your styles for the pages below
+@import './pages/Home/index.scss';
+@import './pages/Detail/index.scss';
+
+:root {
+  background-color: $c-gray-light-4;
+  font-family: $ff-sans-serif;
+}
