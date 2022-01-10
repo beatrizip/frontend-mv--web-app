@@ -1,11 +1,14 @@
 {
-  "vendors~Detail~Home.js": "/vendors~Detail~Home.b68dbf66.js",
-  "Detail.js": "/Detail.f67d6345.js",
-  "Home.js": "/Home.1ca827f3.js",
-  "MovieUseCasesFactory.js": "/MovieUseCasesFactory.9e888fc8.js",
-  "main.css": "/main.f06ddab9.css",
-  "main.js": "/main.10061877.js",
-  "runtime~main.js": "/runtime~main.698ba19b.js",
-  "vendors~MovieUseCasesFactory.js": "/vendors~MovieUseCasesFactory.025db4c9.js",
+  "vendors~Detail~Home.js": "/vendors~Detail~Home.a6e2a62b.js",
+  "Detail.js": "/Detail.7865871d.js",
+  "Home.js": "/Home.188a6961.js",
+  "MovieUseCasesFactory.js": "/MovieUseCasesFactory.b5eb6586.js",
+  "main.css": "/main.a8e20195.css",
+  "main.js": "/main.5a4bec16.js",
+  "runtime~main.js": "/runtime~main.bdc42b5c.js",
+  "vendors~Home.js": "/vendors~Home.101c628a.js",
+  "vendors~MovieUseCasesFactory.js": "/vendors~MovieUseCasesFactory.d4e1ff8f.js",
+  "8.c9d9665d.js": "/8.c9d9665d.js",
+  "9.a8add0ee.js": "/9.a8add0ee.js",
   "index.html": "/index.html"
 }

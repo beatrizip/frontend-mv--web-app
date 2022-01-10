@@ -1,26 +1,9 @@
-import React, {useContext, useEffect, useState} from 'react'
-import Context from '@s-ui/react-context'
+import React from 'react'
+import PropTypes from 'prop-types'
 import Helmet from 'react-helmet'
 import MovieDetail from 'frontend-mv--uilib-components-movie-detail'
-import {useParams} from '@s-ui/react-router'
 
-const Detail = () => {
-  const {id} = useParams()
-  const {domain} = useContext(Context)
-  const [movie, setMovie] = useState()
-
-  useEffect(() => {
-    domain
-      .get('get_movie_detail_use_case')
-      .execute({id})
-      .then(movie => setMovie(movie))
-      .catch(error =>
-        console.log('ERROR (get_movie_details_use_case): ', error)
-      )
-  }, [domain, id])
-
-  if (!movie) return null
-
+const Detail = ({movie}) => {
   return (
     <div className="mv-PageDetail">
       <Helmet>
@@ -30,6 +13,20 @@ const Detail = () => {
       <MovieDetail movie={movie} />
     </div>
   )
+}
+
+Detail.getInitialProps = async ({context, routeInfo}) => {
+  const {id} = routeInfo.params
+
+  const movie = await context.domain
+    .get('get_movie_detail_use_case')
+    .execute({id})
+
+  return {movie}
+}
+
+Detail.propTypes = {
+  movie: PropTypes.object.isRequired
 }
 
 export default Detail

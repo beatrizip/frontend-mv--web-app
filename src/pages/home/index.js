@@ -1,4 +1,5 @@
 import React, {useContext, useEffect, useState} from 'react'
+import PropTypes from 'prop-types'
 import Helmet from 'react-helmet'
 import Context from '@s-ui/react-context'
 import MoleculePagination from '@s-ui/react-molecule-pagination'
@@ -8,7 +9,7 @@ import Card from 'frontend-mv--uilib-components-content-card'
 import MoviePoster from 'frontend-mv--uilib-components-movie-poster'
 import MovieInfo from 'frontend-mv--uilib-components-movie-info'
 
-const Home = () => {
+const Home = ({popularMovies}) => {
   const BASE_CLASS = 'mv-PageHome'
   const MAX_PAGES = 10
   const PREV_BUTTON_TEXT = 'Anterior'
@@ -16,21 +17,14 @@ const Home = () => {
 
   const {domain} = useContext(Context)
 
-  const [movies, setMovies] = useState([])
+  const [movies, setMovies] = useState(popularMovies)
   const [criteria, setCriteria] = useState('')
   const [totalSearch, setTotalSearch] = useState(-1)
-  // Total search =  0 -> 0 resultados encontrados
-  //              =  n -> n resultados encontrados
-  //              = -1 -> no hay búsqueda
   const [page, setPage] = useState(1)
   const [totalPages, setTotalPages] = useState(1)
 
   useEffect(() => {
-    showPopularMovies()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
-
-  useEffect(() => {
+    if (criteria === '') return
     searchByCriteriaAndPage()
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [page, criteria])
@@ -56,9 +50,6 @@ const Home = () => {
       .get('get_most_popular_movie_list_use_case')
       .execute()
       .then(({results}) => setMovies(results))
-      .catch(error =>
-        console.log('ERROR (get_most_popular_movie_list_use_case): ', error)
-      )
   }
 
   const searchByCriteriaAndPage = () => {
@@ -77,12 +68,6 @@ const Home = () => {
             : setTotalPages(MAX_PAGES)
           setMovies(movieList)
         }
-      )
-      .catch(error =>
-        console.log(
-          'ERROR (get_movie_list_by_criteria_and_page_use_case): ',
-          error
-        )
       )
   }
 
@@ -110,17 +95,19 @@ const Home = () => {
 
         <div>
           <List>
-            {movies.map(({title, overview, id, poster_path: poster}, index) => {
-              return (
-                <li key={index}>
-                  <Card
-                    content={<MovieInfo title={title} text={overview} />}
-                    media={<MoviePoster path={poster} />}
-                    href={`/movie/${id}`}
-                  />
-                </li>
-              )
-            })}
+            {movies.results.map(
+              ({title, overview, id, poster_path: poster}, index) => {
+                return (
+                  <li key={index}>
+                    <Card
+                      content={<MovieInfo title={title} text={overview} />}
+                      media={<MoviePoster path={poster} />}
+                      href={`/movie/${id}`}
+                    />
+                  </li>
+                )
+              }
+            )}
           </List>
 
           {totalPages > 1 && (
@@ -141,6 +128,18 @@ const Home = () => {
       </div>
     </>
   )
+}
+
+Home.getInitialProps = async ({context}) => {
+  const popularMovies = await context.domain
+    .get('get_most_popular_movie_list_use_case')
+    .execute()
+
+  return {popularMovies}
+}
+
+Home.propTypes = {
+  popularMovies: PropTypes.object.isRequired
 }
 
 export default Home

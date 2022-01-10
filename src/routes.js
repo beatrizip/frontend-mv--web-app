@@ -13,10 +13,8 @@ const Detail = loadPage(contextFactory, () =>
 
 export default (
   <Router>
-    <Route>
-      <Route path="/">
-        <IndexRoute getComponent={Home} />
-      </Route>
+    <Route path="/">
+      <IndexRoute getComponent={Home} />
       <Route path="/movie/:id" getComponent={Detail} />
     </Route>
   </Router>
